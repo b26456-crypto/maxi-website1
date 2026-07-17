@@ -50,7 +50,7 @@ const EVENTS_DATA = [
 
 export default function FlagshipEvents() {
   const [activeTab, setActiveTab] = useState("All");
-  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [selectedEvent, setSelectedEvent] = useState<any>(null);
 
   useEffect(() => {
     if (selectedEvent) {
