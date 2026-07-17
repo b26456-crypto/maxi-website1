@@ -2,19 +2,16 @@ import React from "react";
 
 const PARTNERS = {
   research: [
-    {
-      name: "Dabur",
-      logo: "https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?w=120&auto=format&fit=crop&q=60",
-    }, // Substitute with clear logo assets
-    { name: "Noise", label: "noise" },
+    { name: "Dabur", label: "DABUR" },
+    { name: "Noise", label: "NOISE" },
     { name: "Aditya Birla Group", label: "ADITYA BIRLA GROUP" },
     { name: "AB InBev", label: "ABInBev" },
-    { name: "Reckitt", label: "reckitt" },
+    { name: "Reckitt", label: "RECKITT" },
     { name: "Kia", label: "KIA" },
   ],
   event: [
     { name: "Unibic", label: "UNIBIC" },
-    { name: "Fever FM", label: "fever" },
+    { name: "Fever FM", label: "FEVER FM" },
     { name: "InsideIIM", label: "InsideIIM.com" },
     { name: "Orion", label: "ORION" },
     { name: "Decathlon", label: "DECATHLON" },
@@ -34,8 +31,9 @@ export default function Partners() {
         </h2>
       </div>
 
-      {/* Row 1: Research Partners (Infinite Scroll Right-to-Left) */}
+      {/* Ticker System Wrapper */}
       <div className="space-y-10">
+        {/* Row 1: Research Partners (Infinite Scroll Right-to-Left) */}
         <div>
           <div className="max-w-6xl mx-auto px-6 mb-4">
             <h3 className="text-xs font-bold uppercase tracking-wider text-[#C2125B]">
@@ -43,21 +41,29 @@ export default function Partners() {
             </h3>
           </div>
 
-          {/* Loop Container */}
           <div className="w-full relative flex overflow-x-hidden border-y border-stone-200/60 bg-white/40 backdrop-blur-md py-6">
-            <div className="animate-marquee whitespace-nowrap flex gap-8 items-center minimal-ticker">
-              {[
-                ...PARTNERS.research,
-                ...PARTNERS.research,
-                ...PARTNERS.research,
-              ].map((partner, index) => (
-                <div
-                  key={index}
-                  className="inline-flex items-center justify-center min-w-[160px] h-20 px-6 bg-white border border-stone-200/80 rounded-xl shadow-xs font-black text-stone-800 tracking-tight text-center text-lg hover:border-stone-400 transition-colors mx-4"
-                >
-                  {partner.label || partner.name}
-                </div>
-              ))}
+            {/* Double mapped layout track wrapper to ensure continuous flow seamlessly */}
+            <div className="flex gap-0 whitespace-nowrap minimal-ticker-wrapper">
+              <div className="animate-marquee flex items-center shrink-0">
+                {[...PARTNERS.research, ...PARTNERS.research].map((partner, index) => (
+                  <div
+                    key={`research-1-${index}`}
+                    className="inline-flex items-center justify-center min-w-[160px] h-20 px-6 bg-white border border-stone-200/80 rounded-xl shadow-xs font-black text-stone-800 tracking-tight text-center text-lg hover:border-stone-400 transition-colors mx-4 select-none"
+                  >
+                    {partner.label || partner.name}
+                  </div>
+                ))}
+              </div>
+              <div className="animate-marquee flex items-center shrink-0" aria-hidden="true">
+                {[...PARTNERS.research, ...PARTNERS.research].map((partner, index) => (
+                  <div
+                    key={`research-2-${index}`}
+                    className="inline-flex items-center justify-center min-w-[160px] h-20 px-6 bg-white border border-stone-200/80 rounded-xl shadow-xs font-black text-stone-800 tracking-tight text-center text-lg hover:border-stone-400 transition-colors mx-4 select-none"
+                  >
+                    {partner.label || partner.name}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -71,39 +77,50 @@ export default function Partners() {
           </div>
 
           <div className="w-full relative flex overflow-x-hidden border-y border-stone-200/60 bg-white/40 backdrop-blur-md py-6">
-            <div className="animate-marqueeReverse whitespace-nowrap flex gap-8 items-center minimal-ticker">
-              {[...PARTNERS.event, ...PARTNERS.event, ...PARTNERS.event].map(
-                (partner, index) => (
+            <div className="flex gap-0 whitespace-nowrap minimal-ticker-wrapper">
+              <div className="animate-marqueeReverse flex items-center shrink-0">
+                {[...PARTNERS.event, ...PARTNERS.event].map((partner, index) => (
                   <div
-                    key={index}
-                    className="inline-flex items-center justify-center min-w-[160px] h-20 px-6 bg-white border border-stone-200/80 rounded-xl shadow-xs font-black text-stone-800 tracking-tight text-center text-lg hover:border-stone-400 transition-colors mx-4"
+                    key={`event-1-${index}`}
+                    className="inline-flex items-center justify-center min-w-[160px] h-20 px-6 bg-white border border-stone-200/80 rounded-xl shadow-xs font-black text-stone-800 tracking-tight text-center text-lg hover:border-stone-400 transition-colors mx-4 select-none"
                   >
                     {partner.label || partner.name}
                   </div>
-                )
-              )}
+                ))}
+              </div>
+              <div className="animate-marqueeReverse flex items-center shrink-0" aria-hidden="true">
+                {[...PARTNERS.event, ...PARTNERS.event].map((partner, index) => (
+                  <div
+                    key={`event-2-${index}`}
+                    className="inline-flex items-center justify-center min-w-[160px] h-20 px-6 bg-white border border-stone-200/80 rounded-xl shadow-xs font-black text-stone-800 tracking-tight text-center text-lg hover:border-stone-400 transition-colors mx-4 select-none"
+                  >
+                    {partner.label || partner.name}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Inject custom marquee animation styles into the page header */}
+      {/* Inline Perfect Loop CSS Injection Layer */}
       <style>{`
         @keyframes marquee {
           0% { transform: translateX(0%); }
-          100% { transform: translateX(-33.33%); }
+          100% { transform: translateX(-50%); }
         }
         @keyframes marqueeReverse {
-          0% { transform: translateX(-33.33%); }
+          0% { transform: translateX(-50%); }
           100% { transform: translateX(0%); }
         }
         .animate-marquee {
-          animation: marquee 25s linear infinite;
+          animation: marquee 30s linear infinite;
         }
         .animate-marqueeReverse {
-          animation: marqueeReverse 25s linear infinite;
+          animation: marqueeReverse 30s linear infinite;
         }
-        .animate-marquee:hover, .animate-marqueeReverse:hover {
+        .minimal-ticker-wrapper:hover .animate-marquee,
+        .minimal-ticker-wrapper:hover .animate-marqueeReverse {
           animation-play-state: paused;
         }
       `}</style>
