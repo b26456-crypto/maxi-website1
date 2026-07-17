@@ -53,6 +53,15 @@ export default function FlagshipEvents() {
   const [selectedEvent, setSelectedEvent] = useState<any>(null);
   
   // New minimal states required to manage form inline progression safely
+  interface EventType {
+  id: string;
+  title: string;
+  category: string;
+  date: string;
+  stats: string[];
+  description: string;
+  longDescription?: string;
+}
   const [showForm, setShowForm] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", college: "" });
