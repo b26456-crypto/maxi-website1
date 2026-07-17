@@ -1,14 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function Hero() {
   const [showLegacy, setShowLegacy] = useState(false);
 
+  // Smooth scroll handler pointing seamlessly to the next section
   const scrollToEvents = () => {
     const eventsSection = document.querySelector("section:nth-of-type(2)");
     if (eventsSection) {
       eventsSection.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  // Prevent background scroll when the history panel layer is active
+  useEffect(() => {
+    if (showLegacy) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [showLegacy]);
 
   return (
     <section className="relative min-h-[90vh] flex items-center bg-transparent text-slate-900 px-6 md:px-12 overflow-hidden">
@@ -72,7 +85,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Right Column: Clean Editorial Fact Blocks instead of the Monitor */}
+        {/* Right Column: Clean Editorial Fact Blocks */}
         <div className="md:col-span-6 w-full space-y-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Fact Block 1 */}
@@ -99,7 +112,7 @@ export default function Hero() {
               </p>
             </div>
 
-            {/* Fact Block 3 (Spans full width on desktop) */}
+            {/* Fact Block 3 */}
             <div className="p-6 bg-gradient-to-br from-white/80 to-[#FCFBF7]/40 border border-stone-200/60 sm:col-span-2 rounded-2xl shadow-md backdrop-blur-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="space-y-1">
                 <h3 className="text-xs font-black uppercase tracking-wider text-[#C2125B]">
@@ -125,8 +138,15 @@ export default function Hero() {
 
       {/* Legacy History Overlay Panel */}
       {showLegacy && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-stone-950/40 backdrop-blur-xl">
-          <div className="bg-[#FCFBF7]/95 border border-white/20 w-full max-w-2xl rounded-2xl shadow-2xl overflow-y-auto p-6 md:p-8 max-h-[80vh] relative">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10">
+          {/* Ambient Backdrop Blur Shadow Layer */}
+          <div 
+            onClick={() => setShowLegacy(false)}
+            className="absolute inset-0 bg-stone-950/40 backdrop-blur-xl pointer-events-auto"
+          />
+
+          {/* Modal Window Canvas Box */}
+          <div className="bg-[#FCFBF7]/95 border border-white/20 w-full max-w-2xl rounded-2xl shadow-2xl overflow-y-auto p-6 md:p-8 max-h-[85vh] relative z-10">
             <div className="flex justify-between items-center border-b border-stone-200 pb-4 mb-6">
               <div>
                 <span className="text-[10px] uppercase font-black tracking-widest text-[#C2125B]">
@@ -139,6 +159,7 @@ export default function Hero() {
               <button
                 onClick={() => setShowLegacy(false)}
                 className="w-8 h-8 flex items-center justify-center rounded-xl bg-stone-200/60 hover:bg-stone-200 text-stone-800 transition-all font-bold text-sm"
+                aria-label="Close panel"
               >
                 ✕
               </button>
