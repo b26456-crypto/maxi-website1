@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
+
+    <!-- Tailwind Engine -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      /* Base setup ensuring the page canvas allows depth */
+      html,
+      body {
+        background-color: #fcfbf7 !important;
+        min-height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Moving Ambient Layer 1 (Burgundy Glow - Top Left) */
+      body::before {
+        content: "";
+        position: fixed;
+        top: -15%;
+        left: -15%;
+        width: 75vw;
+        height: 75vw;
+        border-radius: 50%;
+        /* Bumped up opacity significantly (0.25) so it stands out beautifully */
+        background: radial-gradient(
+          circle,
+          rgba(194, 12, 91, 0.25) 0%,
+          rgba(194, 12, 91, 0.05) 50%,
+          transparent 70%
+        );
+        filter: blur(100px);
+        z-index: -1; /* Placed behind the React app layer */
+        pointer-events: none;
+        animation: globalFloat 22s ease-in-out infinite;
+      }
+
+      /* Moving Ambient Layer 2 (Warm Amber Glow - Bottom Right) */
+      body::after {
+        content: "";
+        position: fixed;
+        bottom: -15%;
+        right: -15%;
+        width: 65vw;
+        height: 65vw;
+        border-radius: 50%;
+        /* Bumped up opacity significantly (0.20) for optimal pop */
+        background: radial-gradient(
+          circle,
+          rgba(245, 158, 11, 0.2) 0%,
+          rgba(245, 158, 11, 0.03) 50%,
+          transparent 70%
+        );
+        filter: blur(100px);
+        z-index: -1; /* Placed behind the React app layer */
+        pointer-events: none;
+        animation: globalFloat 28s ease-in-out infinite reverse;
+      }
+
+      @keyframes globalFloat {
+        0%,
+        100% {
+          transform: translate(0px, 0px) scale(1);
+        }
+        33% {
+          transform: translate(60px, -40px) scale(1.08);
+        }
+        66% {
+          transform: translate(-40px, 40px) scale(0.92);
+        }
+      }
+    </style>
+
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <title>MAXI Optimization Prototype</title>
+  </head>
+
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+
+    <!-- React Mount Root -->
+    <div id="root" class="relative z-10"></div>
+  </body>
+</html>
