@@ -50,17 +50,21 @@ const EVENTS_DATA = [
 
 export default function FlagshipEvents() {
   const [activeTab, setActiveTab] = useState("All");
-  const [selectedEvent, setSelectedEvent] = useState<any>(null);
+const [selectedEvent, setSelectedEvent] =
+    useState<EventType | null>(null);
   
   // New minimal states required to manage form inline progression safely
-  interface EventType {
+interface EventType {
   id: string;
   title: string;
   category: string;
   date: string;
   stats: string[];
   description: string;
-  longDescription?: string;
+  longDescription: string;
+  timeline: string[];
+  sponsors: string[];
+  gallery: string[];
 }
   const [showForm, setShowForm] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
