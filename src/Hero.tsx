@@ -59,7 +59,7 @@ export default function Hero() {
           variants={itemVariants}
           className="max-w-2xl text-base md:text-lg text-stone-600 font-medium leading-relaxed mb-12"
         >
-          Welcome to a high-end showcase of modern design aesthetics combined with continuous dynamic performance. Explore our network, discover our flagship events, and experience the premium standard.
+         Welcome to MAXI, the Marketing Association of XLRI website which brings marketing knowledge to life through high-impact, disguised market research weaponized as experiential public festivals.
         </motion.p>
 
         {/* Dynamic Action Buttons Group */}
