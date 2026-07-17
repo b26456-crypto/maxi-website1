@@ -1,7 +1,20 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const EVENTS_DATA = [
+interface EventType {
+  id: string;
+  title: string;
+  category: string;
+  date: string;
+  stats: string[];
+  description: string;
+  longDescription: string;
+  timeline: string[];
+  sponsors: string[];
+  gallery: string[];
+}
+
+const EVENTS_DATA: EventType[] = [
   {
     id: "maxi-mela",
     title: "MAXI Mela",
@@ -54,18 +67,7 @@ const [selectedEvent, setSelectedEvent] =
     useState<EventType | null>(null);
   
   // New minimal states required to manage form inline progression safely
-interface EventType {
-  id: string;
-  title: string;
-  category: string;
-  date: string;
-  stats: string[];
-  description: string;
-  longDescription: string;
-  timeline: string[];
-  sponsors: string[];
-  gallery: string[];
-}
+
   const [showForm, setShowForm] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", college: "" });
